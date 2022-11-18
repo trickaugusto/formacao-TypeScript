@@ -1,27 +1,20 @@
 export class Negociacao {
-    private _data: Date;
-    private _quantidade: number;
-    private _valor: number;
 
-    constructor(data: Date, quantidade: number, valor: number) {
-        this._data = data;
-        this._quantidade = quantidade;
-        this._valor = valor;
+    // não preciso declarar propriedade se eu coloco dessa forma no construtor que recebe parâmetros:
+    constructor(
+        private _data: Date, 
+        public readonly quantidade: number, 
+        public readonly valor: number
+    ) {}
+    // Não preciso de getters se eu declarar como readonly, assim não é possível alterar
+
+    get volume(): number {
+        return this.quantidade * this.valor;
     }
 
-    get data() {
-        return this._data;
-    }
+    get data(): Date {
+        const data = new Date(this._data.getTime());
 
-    get quantidade() {
-        return this._quantidade;
-    }
-
-    get valor() {
-        return this._valor;
-    }
-
-    get volume() {
-        return this._quantidade * this._valor;
+        return data;
     }
 }
